@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request, Response
 from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 
 app = Flask(__name__)
-r = redis.Redis(host=os.getenv("REDIS_HOST", "localhost"), port=6379, decode_responses=True)
+r = redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379"), decode_responses=True)
 REQS = Counter("app_requests_total", "Total requests", ["endpoint", "method"])
 
 
